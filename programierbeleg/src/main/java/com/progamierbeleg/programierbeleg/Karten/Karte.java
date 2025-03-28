@@ -30,36 +30,6 @@ public class Karte {
     public Karte(Farbe f, Wert w) {
         this.f = f;
         this.w = w;
-
-        /** 
-        Map<Wert, Image> spriteskaro = new HashMap<Wert, Image>();
-        Map<Wert, Image> spritesherz = new HashMap<Wert, Image>();
-        Map<Wert, Image> spritespik = new HashMap<Wert, Image>();
-        Map<Wert, Image> spriteskreuz = new HashMap<Wert, Image>();
-        
-        Map<Farbe, Map<Wert, Image>> spritescolor = new HashMap<Farbe,Map<Wert,Image>>();
-         
-        spritescolor.put(Farbe.KARO, spriteskaro);
-        spritescolor.put(Farbe.HERZ, spritesherz);
-        spritescolor.put(Farbe.PIK, spritespik);
-        spritescolor.put(Farbe.KREUZ, spriteskreuz);
-        
-        spriteskaro.put(Wert.ZWEI, karozwei.png);
-        spriteskaro.put(Wert.DREI, karozwei.png);
-        spriteskaro.put(Wert.VIER, karozwei.png);
-        spriteskaro.put(Wert.FUENF, karozwei.png);
-        spriteskaro.put(Wert.SECHS, karozwei.png);
-        spriteskaro.put(Wert.SIEBEN, karozwei.png);
-        spriteskaro.put(Wert.ACHT, karozwei.png);
-        spriteskaro.put(Wert.NEUN, karozwei.png);
-        spriteskaro.put(Wert.ZEHN, karozwei.png);
-        spriteskaro.put(Wert.BUBE, karozwei.png);
-        spriteskaro.put(Wert.DAME, karozwei.png);
-        spriteskaro.put(Wert.KOENIG, karozwei.png);
-        spriteskaro.put(Wert.ASS, karozwei.png);
-        
-        **/
-
     }
     
     /*
