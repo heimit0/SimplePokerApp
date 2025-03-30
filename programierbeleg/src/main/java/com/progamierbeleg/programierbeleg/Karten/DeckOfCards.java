@@ -8,13 +8,14 @@ public class DeckOfCards {
     /*
      * Arraylist um alle Karten des Decks zu halten
      */
+    @SuppressWarnings("FieldMayBeFinal")
     private ArrayList<Karte> deck;
 
     /*
      * Constructor der ein Standart 52 Kartendeck erstellt 
      */
     public DeckOfCards() {
-        deck = new ArrayList<Karte>();
+        deck = new ArrayList<>();
        
         for (Karte.Farbe f : Karte.Farbe.values()) {
             for (Karte.Wert w : Karte.Wert.values()) {
@@ -29,8 +30,8 @@ public class DeckOfCards {
     public Karte deal() {
         Random r = new Random();
         int pick = r.nextInt(51);
-        Karte dealt = deck.get(pick);
-        deck.remove(pick);
+        Karte dealt = getdeck().get(pick);
+        getdeck().remove(pick);
         return dealt;
     }
 
