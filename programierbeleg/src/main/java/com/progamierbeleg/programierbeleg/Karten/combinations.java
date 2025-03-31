@@ -1,15 +1,9 @@
 package com.progamierbeleg.programierbeleg.Karten;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.progamierbeleg.programierbeleg.Karten.Karte;
 import com.progamierbeleg.programierbeleg.Karten.Karte.Farbe;
 import com.progamierbeleg.programierbeleg.Karten.Karte.Wert;
-
-import lombok.val;
 
 public abstract class combinations {
 
@@ -18,7 +12,7 @@ public abstract class combinations {
         ROYAL_FLUSH
     };
 
-    public static  int getCombination(Karte[] hand, Karte[] table) {
+    public static int getCombination(Karte[] hand, Karte[] table) {
         int value = 1;
         ArrayList<Karte> allcards = new ArrayList<>();
         allcards.add(hand[0]);
@@ -107,8 +101,6 @@ public abstract class combinations {
         return false;
     }
 
-    
-
     public static boolean isFourOfAKind(ArrayList<Karte> cards) {
         int counter = 0;
         cards = sort(cards);
@@ -161,10 +153,41 @@ public abstract class combinations {
     }
 
     public static boolean isFullHouse(ArrayList<Karte> cards) {
+        boolean dreier = false;
+        ArrayList<Karte> geprueft = new ArrayList<>();
+        for (int i = 0; i < cards.size(); i++) {
+            geprueft.add(cards.get(i));
+            for (int j = i + 1; j < cards.size(); j++) {
+                if (cards.get(i).getWert() == cards.get(j).getWert()) {
+                    geprueft.add(cards.get(j));
+                }
+            }
+            if (geprueft.size() >= 3) {
+                dreier = true;
+                for (Karte karte : geprueft) {
+                    cards.remove(karte);
+                }
+            }
+            geprueft.clear();
 
+        }
+          for (int i = 0; i < cards.size(); i++) {
+              geprueft.add(cards.get(i));
+                   for (int j = i + 1; j < cards.size(); j++) {
+                        if (cards.get(i).getWert() == cards.get(j).getWert()) {
+                            geprueft.add(cards.get(j));
+                        }
+                    }
+                    if (geprueft.size() >= 2 && dreier) {
+                        return true;
+                    }
+                    geprueft.clear();
+            }
+        
         return false;
     }
-    
+
+
     public static boolean isFlush(ArrayList<Karte> cards) {
 
         return false;
@@ -174,11 +197,10 @@ public abstract class combinations {
 
         return false;
     }
-    
+
     public static boolean isTwoPair(ArrayList<Karte> cards) {
 
         return false;
     }
-
 
 }

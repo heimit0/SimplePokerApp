@@ -35,6 +35,7 @@ public class DeckOfCards {
         return dealt;
     }
 
+    
     private ArrayList<Karte> getdeck() {
         return deck;
     }

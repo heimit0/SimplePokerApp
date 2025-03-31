@@ -23,6 +23,10 @@ public class Karte {
     private final  Farbe f; 
     private final Wert w;
 
+
+    /*
+     * Konstruktor fuer die Klasse karte
+     */
     public Karte(Farbe f, Wert w) {
         this.f = f;
         this.w = w;
@@ -46,6 +50,8 @@ public class Karte {
      * gibt den Wert der Karte zurueck
      */
     public Wert getWert() {
+        if (this == null)
+            return null;
         return w;
     }
     
@@ -54,11 +60,12 @@ public class Karte {
      * is(Farbe, Wert)
      */
     public boolean is(Farbe f, Wert w) {
-        if (this.getFarbe() == f && this.getWert() == w)
-            return true;
-        return false;
+        return (this.getFarbe() == f && this.getWert() == w);
     }
     
+    /*
+     * Konvertiert die Enum zu einem passenden Int-Wert
+     */
     public int toInt() {
         return switch (this.getWert()) {
             case ZWEI -> 2;
