@@ -50,8 +50,6 @@ public class Karte {
      * gibt den Wert der Karte zurueck
      */
     public Wert getWert() {
-        if (this == null)
-            return null;
         return w;
     }
     

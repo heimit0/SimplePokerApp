@@ -3,6 +3,7 @@ package com.progamierbeleg.programierbeleg;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -65,5 +66,58 @@ class ProgramierbelegApplicationTests {
 		assertEquals(false, combinations.isFullHouse(cards));
 	}
 
-	
+	@Test
+	void toInt() {
+		Karte k = new Karte(Farbe.HERZ, Wert.ZEHN);
+		Karte k2 = new Karte(Farbe.KARO, Wert.ACHT);
+		Karte k3 = new Karte(Farbe.KREUZ, Wert.DAME);
+		Karte k4 = new Karte(Farbe.KREUZ, Wert.KOENIG);
+		Karte k5 = new Karte(Farbe.KREUZ, Wert.ASS);
+
+		assertEquals(10, k.toInt());
+		assertEquals(8, k2.toInt());
+		assertEquals(12, k3.toInt());
+		assertEquals(13, k4.toInt());
+		assertEquals(14, k5.toInt());
+	}
+
+	@Test
+	void sort() {
+		ArrayList<Karte> cards2 = new ArrayList<>();
+		cards2.add(new Karte(Farbe.KARO, Wert.ZEHN));
+		cards2.add(new Karte(Farbe.PIK, Wert.BUBE));
+		cards2.add(new Karte(Farbe.KREUZ, Wert.DAME));
+		cards2.add(new Karte(Farbe.KARO, Wert.NEUN));
+		cards2.add(new Karte(Farbe.KARO, Wert.ACHT));
+		cards2.add(new Karte(Farbe.KARO, Wert.SIEBEN));
+		cards2.add(new Karte(Farbe.KARO, Wert.SECHS));
+		ArrayList<Karte> cardshandsorted = new ArrayList<>();
+		cardshandsorted.add(new Karte(Farbe.KARO, Wert.SECHS));
+		cardshandsorted.add(new Karte(Farbe.KARO, Wert.SIEBEN));
+		cardshandsorted.add(new Karte(Farbe.KARO, Wert.ACHT));
+		cardshandsorted.add(new Karte(Farbe.KARO, Wert.NEUN));
+		cardshandsorted.add(new Karte(Farbe.KARO, Wert.ZEHN));
+		cardshandsorted.add(new Karte(Farbe.PIK, Wert.BUBE));
+		cardshandsorted.add(new Karte(Farbe.KREUZ, Wert.DAME));
+		cards2 = combinations.sort(cards2);
+		for (Karte elem : cards2) {
+			System.out.println(elem.toInt());
+		}
+		
+		
+	}
+
+	@Test
+	void isStraightFlush() {
+		ArrayList<Karte> cards2 = new ArrayList<>();
+		cards2.add(new Karte(Farbe.KARO, Wert.ZEHN));
+		cards2.add(new Karte(Farbe.PIK, Wert.ZEHN));
+		cards2.add(new Karte(Farbe.KREUZ, Wert.ZEHN));
+		cards2.add(new Karte(Farbe.KARO, Wert.NEUN));
+		cards2.add(new Karte(Farbe.KARO, Wert.ACHT));
+		cards2.add(new Karte(Farbe.KARO, Wert.SIEBEN));
+		cards2.add(new Karte(Farbe.KARO, Wert.SECHS));
+		assertEquals(true, combinations.isStraightFlush(cards2));
+	}
+
 }

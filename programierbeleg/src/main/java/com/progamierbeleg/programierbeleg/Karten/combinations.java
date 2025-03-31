@@ -58,31 +58,42 @@ public abstract class combinations {
     }
 
     public static ArrayList<Karte> sort(ArrayList<Karte> cards) {
-        for (int i = 1; i < cards.size(); i++) {
-            for (int j = 0; j < cards.size(); j++) {
-                if (cards.get(j).toInt() > cards.get(i).toInt()) {
-                    Karte memKarte = cards.get(i);
-                    cards.set(i, cards.get(j));
-                    cards.set(j, memKarte);
-                }
+        ArrayList<Karte> sorted = new ArrayList<>();
+        int size = cards.size();
+        for (int i = 0; i < size; i++) {
+            Karte smallest = cards.get(0);
+            for (int j = 0; j < size-i; j++) {
+                if (cards.get(j).toInt() < smallest.toInt())
+                    smallest = cards.get(j);
             }
+            sorted.add(smallest);
+            cards.remove(smallest);
         }
-        return cards;
+        return sorted;
+        /* 
+          for (int i = 1; i < cards.size(); i++) {
+          for (int j = 0; j < cards.size(); j++) {
+              if (cards.get(j).toInt() > cards.get(i).toInt()) {
+                  Karte memKarte = cards.get(i);
+                  cards.set(i, cards.get(j));
+                  cards.set(j, memKarte);
+              }
+          }
+          }
+          
+          return cards;
+        
+          */
     }
-
     public static boolean isRoyalFlush(ArrayList<Karte> cards) {
-        int counter = 0;
-        ArrayList<Karte> royalFlush = new ArrayList<Karte>();
+        ArrayList<Karte> royalFlush = new ArrayList<>();
         for (Karte k : cards) {
             if (k.getWert() == Wert.ASS || k.getWert() == Wert.KOENIG || k.getWert() == Wert.DAME
                     || k.getWert() == Wert.BUBE || k.getWert() == Wert.ZEHN) {
                 royalFlush.add(k);
             }
         }
-        if (royalFlush.size() >= 5 && isSameColor(cards)) {
-            return true;
-        }
-        return false;
+        return (royalFlush.size() >= 5 && isSameColor(royalFlush));
     }
 
     public static boolean isStraightFlush(ArrayList<Karte> cards) {
@@ -171,22 +182,21 @@ public abstract class combinations {
             geprueft.clear();
 
         }
-          for (int i = 0; i < cards.size(); i++) {
-              geprueft.add(cards.get(i));
-                   for (int j = i + 1; j < cards.size(); j++) {
-                        if (cards.get(i).getWert() == cards.get(j).getWert()) {
-                            geprueft.add(cards.get(j));
-                        }
-                    }
-                    if (geprueft.size() >= 2 && dreier) {
-                        return true;
-                    }
-                    geprueft.clear();
+        for (int i = 0; i < cards.size(); i++) {
+            geprueft.add(cards.get(i));
+            for (int j = i + 1; j < cards.size(); j++) {
+                if (cards.get(i).getWert() == cards.get(j).getWert()) {
+                    geprueft.add(cards.get(j));
+                }
             }
-        
+            if (geprueft.size() >= 2 && dreier) {
+                return true;
+            }
+            geprueft.clear();
+        }
+
         return false;
     }
-
 
     public static boolean isFlush(ArrayList<Karte> cards) {
 
