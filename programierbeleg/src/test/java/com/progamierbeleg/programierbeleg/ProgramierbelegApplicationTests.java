@@ -91,6 +91,7 @@ class ProgramierbelegApplicationTests {
 		cards2.add(new Karte(Farbe.KARO, Wert.ACHT));
 		cards2.add(new Karte(Farbe.KARO, Wert.SIEBEN));
 		cards2.add(new Karte(Farbe.KARO, Wert.SECHS));
+
 		ArrayList<Karte> cardshandsorted = new ArrayList<>();
 		cardshandsorted.add(new Karte(Farbe.KARO, Wert.SECHS));
 		cardshandsorted.add(new Karte(Farbe.KARO, Wert.SIEBEN));
@@ -99,12 +100,12 @@ class ProgramierbelegApplicationTests {
 		cardshandsorted.add(new Karte(Farbe.KARO, Wert.ZEHN));
 		cardshandsorted.add(new Karte(Farbe.PIK, Wert.BUBE));
 		cardshandsorted.add(new Karte(Farbe.KREUZ, Wert.DAME));
+
 		cards2 = combinations.sort(cards2);
 		for (Karte elem : cards2) {
 			System.out.println(elem.toInt());
 		}
-		
-		
+
 	}
 
 	@Test
@@ -118,6 +119,18 @@ class ProgramierbelegApplicationTests {
 		cards2.add(new Karte(Farbe.KARO, Wert.SIEBEN));
 		cards2.add(new Karte(Farbe.KARO, Wert.SECHS));
 		assertEquals(true, combinations.isStraightFlush(cards2));
+
+		ArrayList<Karte> cards = new ArrayList<>();
+		cards.add(new Karte(Farbe.KARO, Wert.ZEHN));
+		cards.add(new Karte(Farbe.PIK, Wert.ZEHN));
+		cards.add(new Karte(Farbe.KREUZ, Wert.ASS));
+		cards.add(new Karte(Farbe.KARO, Wert.NEUN));
+		cards.add(new Karte(Farbe.KARO, Wert.ACHT));
+		cards.add(new Karte(Farbe.KARO, Wert.SIEBEN));
+		cards.add(new Karte(Farbe.KARO, Wert.DREI));
+		assertEquals(false, combinations.isStraightFlush(cards));
+
 	}
 
+	
 }

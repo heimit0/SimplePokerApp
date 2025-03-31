@@ -3,7 +3,8 @@ package com.progamierbeleg.programierbeleg.Karten;
 import java.util.ArrayList;
 
 import com.progamierbeleg.programierbeleg.Karten.Karte.Farbe;
-import com.progamierbeleg.programierbeleg.Karten.Karte.Wert;
+
+import jakarta.el.ELManager;
 
 public abstract class combinations {
 
@@ -70,27 +71,26 @@ public abstract class combinations {
             cards.remove(smallest);
         }
         return sorted;
-        /* 
-          for (int i = 1; i < cards.size(); i++) {
-          for (int j = 0; j < cards.size(); j++) {
-              if (cards.get(j).toInt() > cards.get(i).toInt()) {
-                  Karte memKarte = cards.get(i);
-                  cards.set(i, cards.get(j));
-                  cards.set(j, memKarte);
-              }
-          }
-          }
-          
-          return cards;
-        
-          */
     }
+
     public static boolean isRoyalFlush(ArrayList<Karte> cards) {
         ArrayList<Karte> royalFlush = new ArrayList<>();
+        int toomanywrong = 0;
         for (Karte k : cards) {
-            if (k.getWert() == Wert.ASS || k.getWert() == Wert.KOENIG || k.getWert() == Wert.DAME
-                    || k.getWert() == Wert.BUBE || k.getWert() == Wert.ZEHN) {
-                royalFlush.add(k);
+            switch (k.getWert()) {
+                case ASS -> royalFlush.add(k);
+                case KOENIG -> royalFlush.add(k);
+                case DAME -> royalFlush.add(k);
+                case BUBE -> royalFlush.add(k);
+                case ZEHN -> royalFlush.add(k);
+                default -> {
+                    if (toomanywrong >= 3)
+                        return false;
+                }
+            }
+                if(!isSameColor(royalFlush)){
+                    royalFlush.remove(k);
+                
             }
         }
         return (royalFlush.size() >= 5 && isSameColor(royalFlush));
@@ -98,17 +98,18 @@ public abstract class combinations {
 
     public static boolean isStraightFlush(ArrayList<Karte> cards) {
         cards = sort(cards);
-        ArrayList<Karte> selected = new ArrayList<>();
-        for (int i = 1; i < cards.size(); i++) {
-            if (cards.get(i).toInt() == cards.get(i - 1).toInt() - 1) {
-                selected.add(cards.get(i - 1));
-            } else {
-                selected.clear();
-            }
-            if (selected.size() >= 4 && isSameColor(selected))
-                return true;
+        int counter = 1;
 
-        }
+       for (int i = 0; i < cards.size()-1; i++) {
+           if (cards.get(i+1).toInt() == (cards.get(i).toInt() + 1) && cards.get(i).getFarbe() == cards.get(i+1).getFarbe()) {
+               counter++;
+               if (counter >= 5)
+                   return true;
+                }
+           else {
+               counter = 1;
+           }
+       }
         return false;
     }
 
