@@ -194,18 +194,43 @@ public abstract class combinations {
         return false;
     }
 
-    public static boolean isFlush(ArrayList<Karte> cards) {
-
-
-
-
-        return false;
-    }
-
     public static boolean isStraight(ArrayList<Karte> cards) {
+        cards = sort(cards);
+        int counter = 1;
 
+        for (int i = 0; i < cards.size() - 1; i++) {
+            if (cards.get(i + 1).toInt() == (cards.get(i).toInt() + 1)) {
+                counter++;
+                if (counter >= 5)
+                    return true;
+            } else {
+                counter = 1;
+            }
+        }
         return false;
     }
+    
+    public static boolean isFlush(ArrayList<Karte> cards) {
+        int karocounter = 0;
+        int herzcounter = 0;
+        int pikcounter = 0;
+        int kreuzcounter = 0;
+
+        for (Karte k : cards) {
+            switch (k.getFarbe()) {
+                case HERZ -> herzcounter++;
+                case KARO -> karocounter++;
+                case PIK -> pikcounter++;
+                case KREUZ -> kreuzcounter++;
+            }
+            if (herzcounter >= 5 || karocounter >= 5 || pikcounter >= 5 || kreuzcounter >= 5) 
+                return true;
+            
+        }
+        return false;
+    }
+
+   
 
     public static boolean isTwoPair(ArrayList<Karte> cards) {
         boolean pair1 = false;

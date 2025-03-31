@@ -129,12 +129,48 @@ public class combinationstest {
 
     @Test
     void isStraight() {
-        //TODO
+        ArrayList<Karte> cards2 = new ArrayList<>();
+        cards2.add(new Karte(Farbe.KARO, Wert.ZEHN));
+        cards2.add(new Karte(Farbe.PIK, Wert.ZEHN));
+        cards2.add(new Karte(Farbe.KREUZ, Wert.ZEHN));
+        cards2.add(new Karte(Farbe.KARO, Wert.NEUN));
+        cards2.add(new Karte(Farbe.PIK, Wert.ACHT));
+        cards2.add(new Karte(Farbe.HERZ, Wert.SIEBEN));
+        cards2.add(new Karte(Farbe.KARO, Wert.SECHS));
+        assertEquals(true, combinations.isStraight(cards2));
+
+        ArrayList<Karte> cards = new ArrayList<>();
+        cards.add(new Karte(Farbe.KARO, Wert.ZEHN));
+        cards.add(new Karte(Farbe.PIK, Wert.ZEHN));
+        cards.add(new Karte(Farbe.KREUZ, Wert.ASS));
+        cards.add(new Karte(Farbe.KARO, Wert.NEUN));
+        cards.add(new Karte(Farbe.KARO, Wert.ACHT));
+        cards.add(new Karte(Farbe.KARO, Wert.SIEBEN));
+        cards.add(new Karte(Farbe.KARO, Wert.DREI));
+        assertEquals(false, combinations.isStraight(cards));
     }
     
     @Test
     void isFlush() {
-        //TODO
+        ArrayList<Karte> cards2 = new ArrayList<>();
+        cards2.add(new Karte(Farbe.KARO, Wert.ZEHN));
+        cards2.add(new Karte(Farbe.PIK, Wert.ZEHN));
+        cards2.add(new Karte(Farbe.KREUZ, Wert.ZEHN));
+        cards2.add(new Karte(Farbe.KARO, Wert.NEUN));
+        cards2.add(new Karte(Farbe.KARO, Wert.ACHT));
+        cards2.add(new Karte(Farbe.KARO, Wert.SIEBEN));
+        cards2.add(new Karte(Farbe.KARO, Wert.SECHS));
+        assertEquals(true, combinations.isFlush(cards2));
+
+        ArrayList<Karte> cards = new ArrayList<>();
+        cards.add(new Karte(Farbe.KARO, Wert.ZEHN));
+        cards.add(new Karte(Farbe.PIK, Wert.ZEHN));
+        cards.add(new Karte(Farbe.KREUZ, Wert.ASS));
+        cards.add(new Karte(Farbe.KARO, Wert.NEUN));
+        cards.add(new Karte(Farbe.KARO, Wert.ACHT));
+        cards.add(new Karte(Farbe.HERZ, Wert.SIEBEN));
+        cards.add(new Karte(Farbe.KREUZ, Wert.DREI));
+        assertEquals(false, combinations.isFlush(cards));
     }
     
     @Test
