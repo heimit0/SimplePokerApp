@@ -1,10 +1,8 @@
 package com.progamierbeleg.programierbeleg.Karten;
 
 import java.util.ArrayList;
-
 import com.progamierbeleg.programierbeleg.Karten.Karte.Farbe;
 
-import jakarta.el.ELManager;
 
 public abstract class combinations {
 
@@ -14,7 +12,7 @@ public abstract class combinations {
     };
 
     public static int getCombination(Karte[] hand, Karte[] table) {
-        int value = 1;
+        int value;
         ArrayList<Karte> allcards = new ArrayList<>();
         allcards.add(hand[0]);
         allcards.add(hand[1]);
@@ -132,7 +130,6 @@ public abstract class combinations {
     public static boolean isStraight(ArrayList<Karte> cards) {
         cards = sort(cards);
         int counter = 1;
-
         for (int i = 0; i < cards.size() - 1; i++) {
             if (cards.get(i + 1).toInt() == (cards.get(i).toInt() + 1)) {
                 counter++;
@@ -160,7 +157,6 @@ public abstract class combinations {
             }
             if (herzcounter >= 5 || karocounter >= 5 || pikcounter >= 5 || kreuzcounter >= 5)
                 return true;
-
         }
         return false;
     }
@@ -182,7 +178,6 @@ public abstract class combinations {
                 }
             }
             geprueft.clear();
-
         }
         for (int i = 0; i < cards.size(); i++) {
             geprueft.add(cards.get(i));
@@ -196,7 +191,6 @@ public abstract class combinations {
             }
             geprueft.clear();
         }
-
         return false;
     }
 
@@ -251,12 +245,8 @@ public abstract class combinations {
             }
             if (!isSameColor(royalFlush)) {
                 royalFlush.remove(k);
-
             }
         }
         return (royalFlush.size() >= 5 && isSameColor(royalFlush));
     }
-
-    
-
 }
