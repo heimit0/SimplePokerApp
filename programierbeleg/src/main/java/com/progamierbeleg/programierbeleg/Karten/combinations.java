@@ -148,18 +148,13 @@ public abstract class combinations {
     }
 
     public static boolean isPair(ArrayList<Karte> cards) {
-        int counter = 0;
         cards = sort(cards);
         for (int i = 0; i < cards.size(); i++) {
-            for (int j = i; j < cards.size(); j++) {
+            for (int j = i+1; j < cards.size(); j++) {
                 if (cards.get(i).toInt() == cards.get(j).toInt()) {
-                    counter++;
-                }
-                if (counter >= 2) {
                     return true;
                 }
             }
-            counter = 0;
         }
         return false;
     }
@@ -213,7 +208,29 @@ public abstract class combinations {
     }
 
     public static boolean isTwoPair(ArrayList<Karte> cards) {
-        
+        boolean pair1 = false;
+        for (int i = 0; i < cards.size() && !pair1; i++) {
+            Karte possible1 = cards.get(i);
+            for (int j = i + 1; j < cards.size() && !pair1; j++) {
+                Karte possible2 = cards.get(j);
+                if (possible1.getWert() == possible2.getWert()) {
+                    pair1 = true;
+                    cards.remove(possible1);
+                    cards.remove(possible2);
+                }
+            }
+        }
+        if (pair1) {
+            for (int i = 0; i < cards.size(); i++) {
+                Karte possible1 = cards.get(i);
+                for (int j = i + 1; j < cards.size(); j++) {
+                    Karte possible2 = cards.get(j);
+                    if (possible1.getWert() == possible2.getWert()) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 

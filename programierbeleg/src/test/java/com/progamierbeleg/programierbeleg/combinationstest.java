@@ -69,11 +69,39 @@ public class combinationstest {
         cards.add(new Karte(Farbe.KARO, Wert.ACHT));
         cards.add(new Karte(Farbe.PIK, Wert.ZEHN));
         assertEquals(true, combinations.isPair(cards));
+
+        ArrayList<Karte> cards2 = new ArrayList<>();
+        cards2.add(new Karte(Farbe.KARO, Wert.ASS));
+        cards2.add(new Karte(Farbe.KARO, Wert.KOENIG));
+        cards2.add(new Karte(Farbe.KARO, Wert.DAME));
+        cards2.add(new Karte(Farbe.KARO, Wert.BUBE));
+        cards2.add(new Karte(Farbe.KARO, Wert.ZWEI));
+        cards2.add(new Karte(Farbe.KARO, Wert.ACHT));
+        cards2.add(new Karte(Farbe.PIK, Wert.ZEHN));
+        assertEquals(false, combinations.isPair(cards2));
     }
 
     @Test
     void isTwoPair() {
-        //TODO
+        ArrayList<Karte> cards = new ArrayList<>();
+        cards.add(new Karte(Farbe.KARO, Wert.ASS));
+        cards.add(new Karte(Farbe.KARO, Wert.KOENIG));
+        cards.add(new Karte(Farbe.KARO, Wert.DAME));
+        cards.add(new Karte(Farbe.KARO, Wert.ACHT));
+        cards.add(new Karte(Farbe.KARO, Wert.ZEHN));
+        cards.add(new Karte(Farbe.KARO, Wert.ACHT));
+        cards.add(new Karte(Farbe.PIK, Wert.ZEHN));
+        assertEquals(true, combinations.isTwoPair(cards));
+
+        ArrayList<Karte> cards2 = new ArrayList<>();
+        cards2.add(new Karte(Farbe.KARO, Wert.ASS));
+        cards2.add(new Karte(Farbe.KARO, Wert.KOENIG));
+        cards2.add(new Karte(Farbe.KARO, Wert.DAME));
+        cards2.add(new Karte(Farbe.KARO, Wert.BUBE));
+        cards2.add(new Karte(Farbe.KARO, Wert.ZWEI));
+        cards2.add(new Karte(Farbe.KARO, Wert.ACHT));
+        cards2.add(new Karte(Farbe.PIK, Wert.ZEHN));
+        assertEquals(false, combinations.isTwoPair(cards2));
     }
 
     @Test
