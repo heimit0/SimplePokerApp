@@ -201,6 +201,9 @@ public abstract class combinations {
 
     public static boolean isFlush(ArrayList<Karte> cards) {
 
+
+
+
         return false;
     }
 
@@ -210,7 +213,7 @@ public abstract class combinations {
     }
 
     public static boolean isTwoPair(ArrayList<Karte> cards) {
-
+        
         return false;
     }
 
