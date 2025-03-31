@@ -63,7 +63,7 @@ public abstract class combinations {
         int size = cards.size();
         for (int i = 0; i < size; i++) {
             Karte smallest = cards.get(0);
-            for (int j = 0; j < size-i; j++) {
+            for (int j = 0; j < size - i; j++) {
                 if (cards.get(j).toInt() < smallest.toInt())
                     smallest = cards.get(j);
             }
@@ -72,60 +72,42 @@ public abstract class combinations {
         }
         return sorted;
     }
-
-    public static boolean isRoyalFlush(ArrayList<Karte> cards) {
-        ArrayList<Karte> royalFlush = new ArrayList<>();
-        int toomanywrong = 0;
-        for (Karte k : cards) {
-            switch (k.getWert()) {
-                case ASS -> royalFlush.add(k);
-                case KOENIG -> royalFlush.add(k);
-                case DAME -> royalFlush.add(k);
-                case BUBE -> royalFlush.add(k);
-                case ZEHN -> royalFlush.add(k);
-                default -> {
-                    if (toomanywrong >= 3)
-                        return false;
-                }
-            }
-                if(!isSameColor(royalFlush)){
-                    royalFlush.remove(k);
-                
-            }
-        }
-        return (royalFlush.size() >= 5 && isSameColor(royalFlush));
-    }
-
-    public static boolean isStraightFlush(ArrayList<Karte> cards) {
-        cards = sort(cards);
-        int counter = 1;
-
-       for (int i = 0; i < cards.size()-1; i++) {
-           if (cards.get(i+1).toInt() == (cards.get(i).toInt() + 1) && cards.get(i).getFarbe() == cards.get(i+1).getFarbe()) {
-               counter++;
-               if (counter >= 5)
-                   return true;
-                }
-           else {
-               counter = 1;
-           }
-       }
-        return false;
-    }
-
-    public static boolean isFourOfAKind(ArrayList<Karte> cards) {
-        int counter = 0;
+    
+    public static boolean isPair(ArrayList<Karte> cards) {
         cards = sort(cards);
         for (int i = 0; i < cards.size(); i++) {
-            for (int j = i; j < cards.size(); j++) {
+            for (int j = i + 1; j < cards.size(); j++) {
                 if (cards.get(i).toInt() == cards.get(j).toInt()) {
-                    counter++;
-                }
-                if (counter >= 4) {
                     return true;
                 }
             }
-            counter = 0;
+        }
+        return false;
+    }
+
+    public static boolean isTwoPair(ArrayList<Karte> cards) {
+        boolean pair1 = false;
+        for (int i = 0; i < cards.size() && !pair1; i++) {
+            Karte possible1 = cards.get(i);
+            for (int j = i + 1; j < cards.size() && !pair1; j++) {
+                Karte possible2 = cards.get(j);
+                if (possible1.getWert() == possible2.getWert()) {
+                    pair1 = true;
+                    cards.remove(possible1);
+                    cards.remove(possible2);
+                }
+            }
+        }
+        if (pair1) {
+            for (int i = 0; i < cards.size(); i++) {
+                Karte possible1 = cards.get(i);
+                for (int j = i + 1; j < cards.size(); j++) {
+                    Karte possible2 = cards.get(j);
+                    if (possible1.getWert() == possible2.getWert()) {
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
@@ -147,14 +129,38 @@ public abstract class combinations {
         return false;
     }
 
-    public static boolean isPair(ArrayList<Karte> cards) {
+    public static boolean isStraight(ArrayList<Karte> cards) {
         cards = sort(cards);
-        for (int i = 0; i < cards.size(); i++) {
-            for (int j = i+1; j < cards.size(); j++) {
-                if (cards.get(i).toInt() == cards.get(j).toInt()) {
+        int counter = 1;
+
+        for (int i = 0; i < cards.size() - 1; i++) {
+            if (cards.get(i + 1).toInt() == (cards.get(i).toInt() + 1)) {
+                counter++;
+                if (counter >= 5)
                     return true;
-                }
+            } else {
+                counter = 1;
             }
+        }
+        return false;
+    }
+    
+    public static boolean isFlush(ArrayList<Karte> cards) {
+        int karocounter = 0;
+        int herzcounter = 0;
+        int pikcounter = 0;
+        int kreuzcounter = 0;
+
+        for (Karte k : cards) {
+            switch (k.getFarbe()) {
+                case HERZ -> herzcounter++;
+                case KARO -> karocounter++;
+                case PIK -> pikcounter++;
+                case KREUZ -> kreuzcounter++;
+            }
+            if (herzcounter >= 5 || karocounter >= 5 || pikcounter >= 5 || kreuzcounter >= 5)
+                return true;
+
         }
         return false;
     }
@@ -194,12 +200,30 @@ public abstract class combinations {
         return false;
     }
 
-    public static boolean isStraight(ArrayList<Karte> cards) {
+    public static boolean isFourOfAKind(ArrayList<Karte> cards) {
+        int counter = 0;
+        cards = sort(cards);
+        for (int i = 0; i < cards.size(); i++) {
+            for (int j = i; j < cards.size(); j++) {
+                if (cards.get(i).toInt() == cards.get(j).toInt()) {
+                    counter++;
+                }
+                if (counter >= 4) {
+                    return true;
+                }
+            }
+            counter = 0;
+        }
+        return false;
+    }
+    
+    public static boolean isStraightFlush(ArrayList<Karte> cards) {
         cards = sort(cards);
         int counter = 1;
 
         for (int i = 0; i < cards.size() - 1; i++) {
-            if (cards.get(i + 1).toInt() == (cards.get(i).toInt() + 1)) {
+            if (cards.get(i + 1).toInt() == (cards.get(i).toInt() + 1)
+                    && cards.get(i).getFarbe() == cards.get(i + 1).getFarbe()) {
                 counter++;
                 if (counter >= 5)
                     return true;
@@ -209,54 +233,30 @@ public abstract class combinations {
         }
         return false;
     }
-    
-    public static boolean isFlush(ArrayList<Karte> cards) {
-        int karocounter = 0;
-        int herzcounter = 0;
-        int pikcounter = 0;
-        int kreuzcounter = 0;
 
+    public static boolean isRoyalFlush(ArrayList<Karte> cards) {
+        ArrayList<Karte> royalFlush = new ArrayList<>();
+        int toomanywrong = 0;
         for (Karte k : cards) {
-            switch (k.getFarbe()) {
-                case HERZ -> herzcounter++;
-                case KARO -> karocounter++;
-                case PIK -> pikcounter++;
-                case KREUZ -> kreuzcounter++;
-            }
-            if (herzcounter >= 5 || karocounter >= 5 || pikcounter >= 5 || kreuzcounter >= 5) 
-                return true;
-            
-        }
-        return false;
-    }
-
-   
-
-    public static boolean isTwoPair(ArrayList<Karte> cards) {
-        boolean pair1 = false;
-        for (int i = 0; i < cards.size() && !pair1; i++) {
-            Karte possible1 = cards.get(i);
-            for (int j = i + 1; j < cards.size() && !pair1; j++) {
-                Karte possible2 = cards.get(j);
-                if (possible1.getWert() == possible2.getWert()) {
-                    pair1 = true;
-                    cards.remove(possible1);
-                    cards.remove(possible2);
+            switch (k.getWert()) {
+                case ASS -> royalFlush.add(k);
+                case KOENIG -> royalFlush.add(k);
+                case DAME -> royalFlush.add(k);
+                case BUBE -> royalFlush.add(k);
+                case ZEHN -> royalFlush.add(k);
+                default -> {
+                    if (toomanywrong >= 3)
+                        return false;
                 }
             }
-        }
-        if (pair1) {
-            for (int i = 0; i < cards.size(); i++) {
-                Karte possible1 = cards.get(i);
-                for (int j = i + 1; j < cards.size(); j++) {
-                    Karte possible2 = cards.get(j);
-                    if (possible1.getWert() == possible2.getWert()) {
-                        return true;
-                    }
-                }
+            if (!isSameColor(royalFlush)) {
+                royalFlush.remove(k);
+
             }
         }
-        return false;
+        return (royalFlush.size() >= 5 && isSameColor(royalFlush));
     }
+
+    
 
 }
