@@ -6,21 +6,22 @@ import com.progamierbeleg.programierbeleg.Karten.Karte.Farbe;
 
 public abstract class combinations {
 
-    private enum allcombinations {
-        HIGHCARD, PAIR, TWO_PAIR, THREE_OF_A_KIND, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_A_KIND, STRAIGHT_FLUSH,
-        ROYAL_FLUSH
-    };
+    /*     private enum allcombinations {
+                HIGHCARD, PAIR, TWO_PAIR, THREE_OF_A_KIND, STRAIGHT, FLUSH, FULL_HOUSE, FOUR_OF_A_KIND, STRAIGHT_FLUSH,
+                ROYAL_FLUSH
+            };
+    */
 
-    public static int getCombination(Karte[] hand, Karte[] table) {
+    public static int getCombination(ArrayList<Karte> hand, ArrayList<Karte> table) {
         int value;
         ArrayList<Karte> allcards = new ArrayList<>();
-        allcards.add(hand[0]);
-        allcards.add(hand[1]);
-        allcards.add(table[0]);
-        allcards.add(table[1]);
-        allcards.add(table[2]);
-        allcards.add(table[3]);
-        allcards.add(table[4]);
+    
+        for (Karte k : hand) {
+            allcards.add(k);
+        }
+        for (Karte k : table) {
+            allcards.add(k);
+        }
 
         if (isRoyalFlush(allcards)) {
             value = 10;
