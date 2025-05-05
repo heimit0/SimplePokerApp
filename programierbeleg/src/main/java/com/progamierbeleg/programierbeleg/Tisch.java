@@ -31,7 +31,16 @@ public class Tisch {
         return table;
     }
 
+    public void addtooPot(int add) {
+        pot += add;
+    }
 
+    public int getPot() {
+        return pot;
+    }
 
+    public void clearPot() {
+        pot = 0;
+    }
 
 }

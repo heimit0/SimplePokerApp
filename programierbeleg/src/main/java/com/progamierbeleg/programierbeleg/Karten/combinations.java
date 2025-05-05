@@ -12,6 +12,13 @@ public abstract class combinations {
             };
     */
 
+
+/**
+ * Ueberprueft mit hilfe von Helfer funktionen, ob und welche gueltige Kombination ein Spieler hat und gibt einen entsprechenden Zahlenwert zurueck
+ * @param hand die Karten des Spielers
+ * @param table die offenen Community-Cards auf dem Tisch
+ * @return int der entsprechende Wert der hand zwischen 1 und 10
+ */
     public static int getCombination(ArrayList<Karte> hand, ArrayList<Karte> table) {
         int value;
         ArrayList<Karte> allcards = new ArrayList<>();
@@ -47,6 +54,11 @@ public abstract class combinations {
         return value;
     }
 
+    /**
+     * Prueft ob alle Karten in einem Array die gleiche Farbe haben
+     * @param cards Ein Array an Karten
+     * @return boolean ob alle Karten die gleiche Farbe haben
+     */
     public static boolean isSameColor(ArrayList<Karte> cards) {
         Farbe color = cards.get(0).getFarbe();
         for (Karte k : cards) {
@@ -57,6 +69,11 @@ public abstract class combinations {
         return true;
     }
 
+    /**
+    * Sortiert die Karten eines Arrays nach ihrem Numerischen Wert (hohes Ass)
+    * @param cards Das zu sortierende Karten array
+    * @return cards Das sortierte Karten array
+    */
     public static ArrayList<Karte> sort(ArrayList<Karte> cards) {
         ArrayList<Karte> sorted = new ArrayList<>();
         int size = cards.size();
@@ -72,6 +89,11 @@ public abstract class combinations {
         return sorted;
     }
     
+    /**
+     * Ueberprueft ob die Kombination "Pair" gegeben ist
+     * @param cards
+     * @return bool
+     */
     public static boolean isPair(ArrayList<Karte> cards) {
         cards = sort(cards);
         for (int i = 0; i < cards.size(); i++) {
@@ -84,6 +106,11 @@ public abstract class combinations {
         return false;
     }
 
+    /**
+     * Ueberprueft ob die Kombination "TwoPair" gegeben ist
+     * @param cards
+     * @return
+     */
     public static boolean isTwoPair(ArrayList<Karte> cards) {
         boolean pair1 = false;
         for (int i = 0; i < cards.size() && !pair1; i++) {
@@ -111,6 +138,11 @@ public abstract class combinations {
         return false;
     }
 
+    /**
+     * Ueberprueft ob die Kombination "Three of a Kind" gegeben ist
+     * @param cards
+     * @return
+     */
     public static boolean isThreeOfAKind(ArrayList<Karte> cards) {
         int counter = 0;
         cards = sort(cards);
@@ -127,7 +159,12 @@ public abstract class combinations {
         }
         return false;
     }
-
+    
+    /**
+     * Ueberprueft ob die Kombination "Straight" gegeben ist
+     * @param cards
+     * @return
+     */
     public static boolean isStraight(ArrayList<Karte> cards) {
         cards = sort(cards);
         int counter = 1;
@@ -143,6 +180,11 @@ public abstract class combinations {
         return false;
     }
     
+    /**
+     * Ueberprueft ob die Kombination "Flush" gegeben ist
+     * @param cards
+     * @return
+     */
     public static boolean isFlush(ArrayList<Karte> cards) {
         int karocounter = 0;
         int herzcounter = 0;
@@ -162,6 +204,11 @@ public abstract class combinations {
         return false;
     }
 
+    /**
+     * Ueberprueft ob die Kombination "Full House" gegeben ist
+     * @param cards
+     * @return
+     */
     public static boolean isFullHouse(ArrayList<Karte> cards) {
         boolean dreier = false;
         ArrayList<Karte> geprueft = new ArrayList<>();
@@ -195,6 +242,12 @@ public abstract class combinations {
         return false;
     }
 
+    /**
+     * Ueberprueft ob die Kombination "Four of a kind" gegeben ist
+     *  
+     * @param cards
+     * @return
+     */
     public static boolean isFourOfAKind(ArrayList<Karte> cards) {
         int counter = 0;
         cards = sort(cards);
@@ -212,6 +265,12 @@ public abstract class combinations {
         return false;
     }
     
+    /**
+     * Ueberprueft ob die Kombination "Straight Flush" gegeben ist
+     * 
+     * @param cards
+     * @return
+     */
     public static boolean isStraightFlush(ArrayList<Karte> cards) {
         cards = sort(cards);
         int counter = 1;
@@ -229,6 +288,12 @@ public abstract class combinations {
         return false;
     }
 
+    /**
+     * Ueberprueft ob die Kombination "Royal Flush gegeben ist"
+     * 
+     * @param cards
+     * @return
+     */
     public static boolean isRoyalFlush(ArrayList<Karte> cards) {
         ArrayList<Karte> royalFlush = new ArrayList<>();
         int toomanywrong = 0;

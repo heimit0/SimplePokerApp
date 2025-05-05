@@ -5,13 +5,13 @@ import java.util.Random;
 
 public class DeckOfCards {
 
-    /*
+    /**
      * Arraylist um alle Karten des Decks zu halten
      */
     @SuppressWarnings("FieldMayBeFinal")
     private ArrayList<Karte> deck;
     Random r;
-    /*
+    /**
      * Constructor der ein Standart 52 Kartendeck erstellt 
      */
     public DeckOfCards() {
@@ -24,21 +24,28 @@ public class DeckOfCards {
         }
     }
 
-    /*
+    /**
      * Gibt eine Zufaellige Karte aus dem Deck aus und entfernt diese aus dem Deck
+     * @return Karte eine zufaellige Karte aus dem Deck
      */
     public Karte deal() {
-        int pick = r.nextInt(51);
+        int pick = r.nextInt(getdeck().size());
         Karte dealt = getdeck().get(pick);
         getdeck().remove(pick);
         return dealt;
     }
 
+    /**
+     * "verbrennt" die oberste Karte des Decks
+     */
     public void burn(){
-        int pick = r.nextInt(51);
-        getdeck().remove(pick);
+        deal();
     }
 
+    /**
+     *  Gibt das Deck zurueck
+     * @return deck 
+     */
     private ArrayList<Karte> getdeck() {
         return deck;
     }

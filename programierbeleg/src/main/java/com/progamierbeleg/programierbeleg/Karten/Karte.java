@@ -20,6 +20,7 @@ public class Karte {
     public enum Wert {
         ZWEI, DREI, VIER, FUENF, SECHS, SIEBEN, ACHT, NEUN, ZEHN, BUBE, DAME, KOENIG, ASS
     }
+    
     private final  Farbe f; 
     private final Wert w;
 
@@ -32,37 +33,44 @@ public class Karte {
         this.w = w;
     }
     
-    /*
+    /**
      * Findet das passende Sprite zu einer beliebigen Karte und gibt es zurueck
-     */
+     * @return Sprite das passende Sprite fuer die Karte
+     **/
     public String getSprite() {
-        return "ressources/Images/" + getFarbe() + "_" + getWert() + ".png";
+        return "KARTEN_SPRITES/" + getFarbe() + "_" + getWert() + ".png";
     }
     
-    /*
+    /**
      * gibt die Farbe der Karte zurueck
-     */
+     * @return Farbe Farbe der Karte
+     **/
     public Farbe getFarbe() {
         return f;
     }
 
-    /*
+    /**
      * gibt den Wert der Karte zurueck
-     */
+     * @return Wert Wert der Karte
+     **/
     public Wert getWert() {
         return w;
     }
     
-    /*
+    /**
      * determines wether a card has a certain value thats given as a param
-     * is(Farbe, Wert)
-     */
+     * @param Farbe f
+     * @param Wert w
+     * 
+     * @return bool ob beide farben gleich sind
+     **/
     public boolean is(Farbe f, Wert w) {
         return (this.getFarbe() == f && this.getWert() == w);
     }
     
-    /*
+    /**
      * Konvertiert die Enum zu einem passenden Int-Wert
+     * @return Wert den Numerischen Wert einer Karte
      */
     public int toInt() {
         return switch (this.getWert()) {
