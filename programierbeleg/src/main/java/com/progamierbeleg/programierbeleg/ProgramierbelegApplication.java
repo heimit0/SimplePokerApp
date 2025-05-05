@@ -2,12 +2,14 @@ package com.progamierbeleg.programierbeleg;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.vaadin.flow.theme.Theme;
+import com.vaadin.flow.component.page.AppShellConfigurator;
 
 @SpringBootApplication
-public class ProgramierbelegApplication {
+@Theme("my-theme")
+public class ProgramierbelegApplication implements AppShellConfigurator {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ProgramierbelegApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(ProgramierbelegApplication.class, args);
+    }
 }
